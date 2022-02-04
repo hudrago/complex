@@ -14,7 +14,7 @@ after_success:
   - docker build -t hugo/multi-server ./server
   - docker build -t hugo/multi-worker ./worker
   #Docker login
-  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - docker login -u "$DOCKER_ID" -p "$DOCKER_sPASSWORD" docker.io
   # Push images to Docker Hub
   - docker push hugo/multi-client
   - docker push hugo/multi-nginx
