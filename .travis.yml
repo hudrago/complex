@@ -3,23 +3,23 @@ services:
   - docker
 
 before_install:
-  - docker build -t hugo/react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t hudrago/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true hugo/react-test npm test
+  - docker run -e CI=true hudrago/react-test npm test
 
 after_success:
-  - docker build -t hugo/multi-client ./client
-  - docker build -t hugo/multi-nginx ./nginx
-  - docker build -t hugo/multi-server ./server
-  - docker build -t hugo/multi-worker ./worker
+  - docker build -t hudrago/multi-client ./client
+  - docker build -t hudrago/multi-nginx ./nginx
+  - docker build -t hudrago/multi-server ./server
+  - docker build -t hudrago/multi-worker ./worker
   #Docker login
   - docker login -u "$DOCKER_ID" -p "$DOCKER_PASSWORD" docker.io
   # Push images to Docker Hub
-  - docker push hugo/multi-client
-  - docker push hugo/multi-nginx
-  - docker push hugo/multi-server
-  - docker push hugo/multi-worker
+  - docker push hudrago/multi-client
+  - docker push hudrago/multi-nginx
+  - docker push hudrago/multi-server
+  - docker push hudrago/multi-worker
 
 deploy:
   provider: elasticbeanstalk
